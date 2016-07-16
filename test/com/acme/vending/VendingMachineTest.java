@@ -23,6 +23,9 @@ public class VendingMachineTest {
 	public void setup() {
 		coinDetector = new CoinDetector();
 		vendingMachine = new VendingMachine(coinDetector);
+		vendingMachine.addProduct(ProductButtonType.A, new Product("Cola", 100));
+		vendingMachine.addProduct(ProductButtonType.B, new Product("Chips", 50));
+		vendingMachine.addProduct(ProductButtonType.C, new Product("Candy", 65));
 	}
 
 	@Test

@@ -2,14 +2,18 @@ package com.acme.vending;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class VendingMachine {
 	
 	private static final String DEFAULT_MESSAGE = "INSERT COIN";
 	
-	private int totalInsertedInCents = 0;
 	private CoinDetector coinDetector;
+	
+	private int totalInsertedInCents = 0;
 	private ArrayList<CoinType> coinReturn  = new ArrayList<CoinType>();
+	private Map<ProductButtonType, Product> products = new TreeMap<ProductButtonType, Product>();;
 
 	public VendingMachine(CoinDetector coinDetector) {
 		this.coinDetector = coinDetector;
@@ -41,14 +45,21 @@ public class VendingMachine {
 	}
 
 	public String pushProductButton(ProductButtonType button) {
-		switch (button) {
-		case A:
-			return "PRICE $1.00";
-		case B:
-			return "PRICE $0.50";
-		default:
+		if (products.containsKey(button)) {
+			return selectProduct(products.get(button));
+		} else {
 			return DEFAULT_MESSAGE;
 		}
+	}
+
+	private String selectProduct(Product product) {
+		if (product.getPriceInCents() > totalInsertedInCents) {
+		}
+		return "PRICE " + renderValueInCents(product.getPriceInCents());
+	}
+
+	public void addProduct(ProductButtonType button, Product product) {
+		products.put(button, product);
 	}
 
 }
