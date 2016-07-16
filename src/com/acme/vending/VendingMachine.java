@@ -12,7 +12,10 @@ public class VendingMachine {
 		}
 	}
 
-	public int getCoinValueInCents(CoinType penny) {
-		return 5;
+	public int getCoinValueInCents(CoinType coin) {
+		if (coin.equals(CoinType.NICKEL)) {
+			return 5;			
+		}
+		return 10;
 	}
 }
