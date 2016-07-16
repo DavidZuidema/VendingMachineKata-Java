@@ -17,6 +17,8 @@ public class VendingMachineTest {
 	public void itIdentifiesValidCoinsCorrectly() {
 		VendingMachine vendingMachine = new VendingMachine();
 		assertTrue(vendingMachine.isValidCoin(CoinType.NICKEL));
+		assertTrue(vendingMachine.isValidCoin(CoinType.DIME));
+		assertTrue(vendingMachine.isValidCoin(CoinType.QUARTER));
 	}
 
 }

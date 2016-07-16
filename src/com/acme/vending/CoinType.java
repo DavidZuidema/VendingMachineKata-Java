@@ -1,5 +1,5 @@
 package com.acme.vending;
 
 public enum CoinType {
-	PENNY, NICKEL;
+	PENNY, NICKEL, DIME, QUARTER;
 }
