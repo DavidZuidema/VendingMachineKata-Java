@@ -86,6 +86,14 @@ public class VendingMachineTest {
 		assertEquals("PRICE $1.00", vendingMachine.pushProductButton(A));
 		assertEquals("PRICE $0.50", vendingMachine.pushProductButton(B));
 		assertEquals("PRICE $0.65", vendingMachine.pushProductButton(C));
+		displaysMessage(DEFAULT_VENDING_MACHINE_MESSAGE);
+	}
+	
+	@Test
+	public void whenAProductIsSelected_andInsufficientFundsWereDeposited_itDisplaysThePriceThenTheTotalInserted() {
+		insert(QUARTER, QUARTER, QUARTER);
+		assertEquals("PRICE $1.00", vendingMachine.pushProductButton(A));
+		displaysMessage("$0.75");
 	}
 
 	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coins) {
