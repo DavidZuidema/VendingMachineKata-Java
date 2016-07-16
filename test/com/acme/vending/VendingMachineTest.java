@@ -20,4 +20,10 @@ public class VendingMachineTest {
 	public void whenNoCoinsHaveBeenInserted_itDisplaysTheDefaultMessage() {
 		assertEquals("INSERT COIN", vendingMachine.getDisplay());
 	}
+	
+	@Test
+	public void whenAnInvalidCoinHasBeenInserted_itDisplaysTheDefaultMessage() {
+		vendingMachine.insertCoin(CoinType.PENNY);
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+	}
 }

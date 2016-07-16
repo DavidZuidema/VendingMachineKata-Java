@@ -11,4 +11,8 @@ public class VendingMachine {
 	public String getDisplay() {
 		return "INSERT COIN";
 	}
+
+	public void insertCoin(CoinType coin) {
+		
+	}
 }
