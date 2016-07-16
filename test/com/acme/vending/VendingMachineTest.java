@@ -7,12 +7,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class VendingMachineTest {
-	
+
 	private static final CoinType NICKEL = CoinType.NICKEL;
 	private static final CoinType DIME = CoinType.DIME;
 	private static final CoinType QUARTER = CoinType.QUARTER;
 	private static final CoinType ANOTHER_INVALID_COIN = CoinType.LOONIE;
 	private static final CoinType INVALID_COIN = CoinType.PENNY;
+	
+	private static final ProductButtonType A = ProductButtonType.A;
+	private static final ProductButtonType B = ProductButtonType.B;
+	private static final ProductButtonType C = ProductButtonType.C;
 
 	private static final String DEFAULT_VENDING_MACHINE_MESSAGE = "INSERT COIN";
 	
@@ -23,9 +27,9 @@ public class VendingMachineTest {
 	public void setup() {
 		coinDetector = new CoinDetector();
 		vendingMachine = new VendingMachine(coinDetector);
-		vendingMachine.addProduct(ProductButtonType.A, new Product("Cola", 100));
-		vendingMachine.addProduct(ProductButtonType.B, new Product("Chips", 50));
-		vendingMachine.addProduct(ProductButtonType.C, new Product("Candy", 65));
+		vendingMachine.addProduct(A, new Product("Cola", 100));
+		vendingMachine.addProduct(B, new Product("Chips", 50));
+		vendingMachine.addProduct(C, new Product("Candy", 65));
 	}
 
 	@Test
@@ -79,21 +83,21 @@ public class VendingMachineTest {
 	
 	@Test
 	public void whenAProductIsSelected_andNoCoinsWereDeposited_itDisplaysThePrice() {
-		assertEquals("PRICE $1.00", vendingMachine.pushProductButton(ProductButtonType.A));
-		assertEquals("PRICE $0.50", vendingMachine.pushProductButton(ProductButtonType.B));
-		assertEquals("PRICE $0.65", vendingMachine.pushProductButton(ProductButtonType.C));
+		assertEquals("PRICE $1.00", vendingMachine.pushProductButton(A));
+		assertEquals("PRICE $0.50", vendingMachine.pushProductButton(B));
+		assertEquals("PRICE $0.65", vendingMachine.pushProductButton(C));
 	}
 
-	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coinTypes) {
+	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coins) {
 		setup();
-		for (CoinType coin : coinTypes) {
-			insert(coin);
-		}
+		insert(coins);
 		displaysMessage(valueDisplay);
 	}
 	
-	private void insert(CoinType coin) {
-		vendingMachine.insertCoin(coin);
+	private void insert(CoinType...coins) {
+		for (CoinType coin : coins) {
+			vendingMachine.insertCoin(coin);
+		}
 	}
 	
 	private void displaysMessage(String message) {
