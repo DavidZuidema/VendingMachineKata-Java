@@ -17,7 +17,9 @@ public class VendingMachine {
 	}
 
 	public void insertCoin(CoinType coin) {
-		coinReturn.add(coin);
+		if (!coinDetector.isValidCoin(coin)) {
+			coinReturn.add(coin);
+		}
 	}
 
 	public List<CoinType> getCoinsInCoinReturn() {
