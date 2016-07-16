@@ -6,6 +6,7 @@ import java.util.List;
 public class VendingMachine {
 	
 	private CoinDetector coinDetector;
+	private ArrayList<CoinType> coinReturn  = new ArrayList<CoinType>();
 
 	public VendingMachine(CoinDetector coinDetector) {
 		this.coinDetector = coinDetector;
@@ -16,12 +17,10 @@ public class VendingMachine {
 	}
 
 	public void insertCoin(CoinType coin) {
-		
+		coinReturn.add(coin);
 	}
 
 	public List<CoinType> getCoinsInCoinReturn() {
-		ArrayList<CoinType> coinReturn = new ArrayList<CoinType>();
-		coinReturn.add(CoinType.PENNY);
 		return coinReturn;
 	}
 }
