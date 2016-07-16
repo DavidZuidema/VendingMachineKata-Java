@@ -8,28 +8,13 @@ import org.junit.Test;
 public class VendingMachineTest {
 	
 	private VendingMachine vendingMachine;
+	private CoinDetector coinDetector;
 
 	@Before
 	public void setup() {
-		vendingMachine = new VendingMachine();		
+		coinDetector = new CoinDetector();
+		vendingMachine = new VendingMachine(coinDetector);		
 	}
 
-	@Test
-	public void itIdentifiesInvalidCoinsCorrectly() {
-		assertFalse(vendingMachine.isValidCoin(CoinType.PENNY));
-	}
-	
-	@Test
-	public void itIdentifiesValidCoinsCorrectly() {
-		assertTrue(vendingMachine.isValidCoin(CoinType.NICKEL));
-		assertTrue(vendingMachine.isValidCoin(CoinType.DIME));
-		assertTrue(vendingMachine.isValidCoin(CoinType.QUARTER));
-	}
 
-	@Test
-	public void itDeterminesTheCorrectMonetaryValueForCoins() {
-		assertEquals(5, vendingMachine.getCoinValueInCents(CoinType.NICKEL));
-		assertEquals(10, vendingMachine.getCoinValueInCents(CoinType.DIME));
-		assertEquals(25, vendingMachine.getCoinValueInCents(CoinType.QUARTER));
-	}
 }
