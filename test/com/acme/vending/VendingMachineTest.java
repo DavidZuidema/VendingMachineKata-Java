@@ -1,15 +1,16 @@
 package com.acme.vending;
 
 import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.*;
-
-import javax.swing.SpringLayout.Constraints;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class VendingMachineTest {
 	
+	private static final CoinType ANOTHER_INVALID_COIN = CoinType.LOONIE;
+
 	private static final CoinType INVALID_COIN = CoinType.PENNY;
 
 	private static final String DEFAULT_VENDING_MACHINE_MESSAGE = "INSERT COIN";
@@ -38,6 +39,14 @@ public class VendingMachineTest {
 	public void whenOneInvalidCoinHasBeenInserted_itAddsThatCoinToTheCoinReturn() {
 		vendingMachine.insertCoin(INVALID_COIN);
 		assertThat(vendingMachine.getCoinsInCoinReturn(), hasItem(INVALID_COIN));
+	}
+	
+	@Test
+	public void whenTwoInvalidCoinsHaveBeenInserted_itAddsBothCoinToTheCoinReturn() {
+		vendingMachine.insertCoin(INVALID_COIN);
+		vendingMachine.insertCoin(ANOTHER_INVALID_COIN);
+		assertEquals(2, vendingMachine.getCoinsInCoinReturn().size());
+		assertThat(vendingMachine.getCoinsInCoinReturn(), hasItems(INVALID_COIN, ANOTHER_INVALID_COIN));
 	}
 	
 	private void checkThatMachineDisplaysMessage(String message) {
