@@ -18,7 +18,8 @@ public class VendingMachineTest {
 	private static final ProductButtonType B = ProductButtonType.B;
 	private static final ProductButtonType C = ProductButtonType.C;
 
-	private static final String DEFAULT_VENDING_MACHINE_MESSAGE = "INSERT COIN";
+	private static final String INSERT_COIN_MESSAGE = "INSERT COIN";
+	private static final String THANK_YOU_MESSAGE = "THANK YOU";
 	
 	private VendingMachine vendingMachine;
 	private CoinDetector coinDetector;
@@ -34,13 +35,13 @@ public class VendingMachineTest {
 
 	@Test
 	public void whenNoCoinsHaveBeenInserted_itDisplaysTheDefaultMessage() {
-		displaysMessage(DEFAULT_VENDING_MACHINE_MESSAGE);
+		displaysMessage(INSERT_COIN_MESSAGE);
 	}
 	
 	@Test
 	public void whenAnInvalidCoinHasBeenInserted_itDisplaysTheDefaultMessage() {
 		insert(INVALID_COIN);
-		displaysMessage(DEFAULT_VENDING_MACHINE_MESSAGE);
+		displaysMessage(INSERT_COIN_MESSAGE);
 	}
 	
 	@Test
@@ -83,24 +84,24 @@ public class VendingMachineTest {
 	
 	@Test
 	public void whenAProductIsSelected_andNoCoinsWereDeposited_itDisplaysThePrice() {
-		assertEquals("PRICE $1.00", vendingMachine.pushProductButton(A));
-		assertEquals("PRICE $0.50", vendingMachine.pushProductButton(B));
-		assertEquals("PRICE $0.65", vendingMachine.pushProductButton(C));
-		displaysMessage(DEFAULT_VENDING_MACHINE_MESSAGE);
+		pushingButtonDisplaysMessage(A, "PRICE $1.00");
+		pushingButtonDisplaysMessage(B, "PRICE $0.50");
+		pushingButtonDisplaysMessage(C, "PRICE $0.65");
+		displaysMessage(INSERT_COIN_MESSAGE);
 	}
-	
+
 	@Test
 	public void whenAProductIsSelected_andInsufficientFundsWereDeposited_itDisplaysThePriceThenTheTotalInserted() {
 		insert(QUARTER, QUARTER, QUARTER);
-		assertEquals("PRICE $1.00", vendingMachine.pushProductButton(A));
+		pushingButtonDisplaysMessage(A, "PRICE $1.00");
 		displaysMessage("$0.75");
 	}
 	
 	@Test
 	public void whenAProductIsSelected_andSufficientFundsWereDeposited_itSaysThankYou() {
 		insert(QUARTER, QUARTER, QUARTER, QUARTER);
-		assertEquals("THANK YOU", vendingMachine.pushProductButton(A));
-		displaysMessage(DEFAULT_VENDING_MACHINE_MESSAGE);
+		pushingButtonDisplaysMessage(A, THANK_YOU_MESSAGE);
+		displaysMessage(INSERT_COIN_MESSAGE);
 	}
 
 	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coins) {
@@ -118,6 +119,10 @@ public class VendingMachineTest {
 	private void displaysMessage(String message) {
 		assertEquals(message, vendingMachine.getDisplay());
 	}
+	
+	private void pushingButtonDisplaysMessage(ProductButtonType button, String displayMessage) {
+		assertEquals(displayMessage, vendingMachine.pushProductButton(button));
+	}
 
 	private void coinReturnContains(CoinType...coinTypes) {
 		assertEquals(coinTypes.length, vendingMachine.getCoinsInCoinReturn().size());
@@ -127,4 +132,5 @@ public class VendingMachineTest {
 	private void coinReturnIsEmpty() {
 		assertEquals(0, vendingMachine.getCoinsInCoinReturn().size());
 	}
+	
 }

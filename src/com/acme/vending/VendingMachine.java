@@ -8,6 +8,7 @@ import java.util.TreeMap;
 public class VendingMachine {
 	
 	private static final String DEFAULT_MESSAGE = "INSERT COIN";
+	private static final String THANK_YOU_MESSAGE = "THANK YOU";
 	
 	private CoinDetector coinDetector;
 	
@@ -58,9 +59,8 @@ public class VendingMachine {
 		} else {
 			dispenseProduct(product);
 			totalInsertedInCents = 0;
-			return "THANK YOU";
+			return THANK_YOU_MESSAGE;
 		}
-
 	}
 
 	private void dispenseProduct(Product product) {
