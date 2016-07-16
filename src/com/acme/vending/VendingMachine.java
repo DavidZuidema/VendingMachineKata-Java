@@ -5,6 +5,7 @@ import java.util.List;
 
 public class VendingMachine {
 	
+	private int totalInsertedInCents = 0;
 	private CoinDetector coinDetector;
 	private ArrayList<CoinType> coinReturn  = new ArrayList<CoinType>();
 
@@ -13,11 +14,16 @@ public class VendingMachine {
 	}
 
 	public String getDisplay() {
-		return "INSERT COIN";
+		if (totalInsertedInCents == 0) {
+			return "INSERT COIN";
+		}
+		return "$0.05";
 	}
 
 	public void insertCoin(CoinType coin) {
-		if (!coinDetector.isValidCoin(coin)) {
+		if (coinDetector.isValidCoin(coin)) {
+			totalInsertedInCents += coinDetector.getCoinValueInCents(coin);
+		} else {
 			coinReturn.add(coin);
 		}
 	}

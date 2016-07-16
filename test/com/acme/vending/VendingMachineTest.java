@@ -55,7 +55,6 @@ public class VendingMachineTest {
 	}
 	
 	@Test
-	@Ignore
 	public void whenANickelIsInserted_itDisplaysTheTotalDeposited() {
 		vendingMachine.insertCoin(CoinType.NICKEL);
 		checkThatMachineDisplaysMessage("$0.05");
