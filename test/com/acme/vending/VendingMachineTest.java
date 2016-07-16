@@ -45,45 +45,37 @@ public class VendingMachineTest {
 	}
 	
 	@Test
-	public void whenOneInvalidCoinHasBeenInserted_itAddsThatCoinToTheCoinReturn() {
+	public void whenOneInvalidCoinIsInserted_itAddsThatCoinToTheCoinReturn() {
 		insert(INVALID_COIN);
 		coinReturnContains(INVALID_COIN);
 	}
 	
 	@Test
-	public void whenTwoInvalidCoinsHaveBeenInserted_itAddsBothCoinsToTheCoinReturn() {
+	public void whenTwoInvalidCoinsAreInserted_itAddsBothCoinsToTheCoinReturn() {
 		insert(INVALID_COIN);
 		insert(ANOTHER_INVALID_COIN);
 		coinReturnContains(INVALID_COIN, ANOTHER_INVALID_COIN);
 	}
 	
 	@Test
-	public void whenANickelIsInserted_itIsNotAddedToTheCoinReturn() {
-		insert(NICKEL);
+	public void whenValidCoinsAreInserted_theyAreNotAddedToTheCoinReturn() {
+		insert(NICKEL, DIME, QUARTER);
 		coinReturnIsEmpty();
 	}
 	
 	@Test
-	public void whenANickelIsInserted_itDisplaysTheTotalDeposited() {
-		insertedCoinsDisplayValue("$0.05", NICKEL);
-	}
-	
-	@Test
-	public void whenADimeIsInserted_itDisplaysTheTotalDeposited() {
-		insertedCoinsDisplayValue("$0.10", DIME);
-	}
-	
-	@Test
 	public void whenValidCoinsAreInserted_itDisplaysTheTotalDeposited() {
-		insertedCoinsDisplayValue("$0.15", NICKEL, DIME);
-		insertedCoinsDisplayValue("$0.25", QUARTER);
-		insertedCoinsDisplayValue("$0.40", NICKEL, DIME, QUARTER);		
-		insertedCoinsDisplayValue("$1.00", QUARTER, QUARTER, QUARTER, QUARTER);
-		insertedCoinsDisplayValue("$1.05", QUARTER, QUARTER, QUARTER, QUARTER, NICKEL);
+		insertingCoinsDisplayValue("$0.05", NICKEL);
+		insertingCoinsDisplayValue("$0.10", DIME);
+		insertingCoinsDisplayValue("$0.15", NICKEL, DIME);
+		insertingCoinsDisplayValue("$0.25", QUARTER);
+		insertingCoinsDisplayValue("$0.40", NICKEL, DIME, QUARTER);		
+		insertingCoinsDisplayValue("$1.00", QUARTER, QUARTER, QUARTER, QUARTER);
+		insertingCoinsDisplayValue("$1.05", QUARTER, QUARTER, QUARTER, QUARTER, NICKEL);
 	}
 	
 	@Test
-	public void whenAProductIsSelected_andNoCoinsWereDeposited_itDisplaysThePrice() {
+	public void whenAProductIsSelected_andNoCoinsWereDeposited_itDisplaysThePrice_thenTheDefaultValue() {
 		pushingButtonDisplaysMessage(A, "PRICE $1.00");
 		pushingButtonDisplaysMessage(B, "PRICE $0.50");
 		pushingButtonDisplaysMessage(C, "PRICE $0.65");
@@ -91,7 +83,7 @@ public class VendingMachineTest {
 	}
 
 	@Test
-	public void whenAProductIsSelected_andInsufficientFundsWereDeposited_itDisplaysThePriceThenTheTotalInserted() {
+	public void whenAProductIsSelected_andInsufficientFundsWereDeposited_itDisplaysThePrice_thenTheTotalInserted() {
 		insert(QUARTER, QUARTER, QUARTER);
 		pushingButtonDisplaysMessage(A, "PRICE $1.00");
 		displaysMessage("$0.75");
@@ -104,7 +96,7 @@ public class VendingMachineTest {
 		displaysMessage(INSERT_COIN_MESSAGE);
 	}
 
-	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coins) {
+	private void insertingCoinsDisplayValue(String valueDisplay, CoinType...coins) {
 		setup();
 		insert(coins);
 		displaysMessage(valueDisplay);
