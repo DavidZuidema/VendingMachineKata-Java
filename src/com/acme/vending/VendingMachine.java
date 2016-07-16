@@ -9,6 +9,6 @@ public class VendingMachine {
 	}
 
 	public String getDisplay() {
-		return null;
+		return "INSERT COIN";
 	}
 }
