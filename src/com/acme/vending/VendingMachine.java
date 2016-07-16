@@ -13,6 +13,6 @@ public class VendingMachine {
 	}
 
 	public int getCoinValueInCents(CoinType penny) {
-		return 0;
+		return 5;
 	}
 }
