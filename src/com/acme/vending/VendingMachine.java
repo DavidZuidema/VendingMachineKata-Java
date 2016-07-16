@@ -13,9 +13,16 @@ public class VendingMachine {
 	}
 
 	public int getCoinValueInCents(CoinType coin) {
-		if (coin.equals(CoinType.NICKEL)) {
-			return 5;			
+		switch (coin) {
+		case DIME:
+			return 10;
+		case NICKEL:
+			return 5;
+		case QUARTER:
+			return 25;
+		default:
+			//Invalid coins have no value in the system
+			return 0;
 		}
-		return 10;
 	}
 }
