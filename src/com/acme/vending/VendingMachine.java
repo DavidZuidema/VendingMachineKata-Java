@@ -17,7 +17,13 @@ public class VendingMachine {
 		if (totalInsertedInCents == 0) {
 			return "INSERT COIN";
 		}
-		return "$0.05";
+		return renderValueInCents(totalInsertedInCents);
+	}
+	
+	private String renderValueInCents(int valueInCents) {
+		int cents = valueInCents % 100;
+		int dollars = valueInCents - cents;
+		return String.format("$%01d.%02d", dollars, cents);
 	}
 
 	public void insertCoin(CoinType coin) {
@@ -31,4 +37,5 @@ public class VendingMachine {
 	public List<CoinType> getCoinsInCoinReturn() {
 		return coinReturn;
 	}
+
 }
