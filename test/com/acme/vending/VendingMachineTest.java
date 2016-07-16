@@ -95,6 +95,13 @@ public class VendingMachineTest {
 		assertEquals("PRICE $1.00", vendingMachine.pushProductButton(A));
 		displaysMessage("$0.75");
 	}
+	
+	@Test
+	public void whenAProductIsSelected_andSufficientFundsWereDeposited_itSaysThankYou() {
+		insert(QUARTER, QUARTER, QUARTER, QUARTER);
+		assertEquals("THANK YOU", vendingMachine.pushProductButton(A));
+		displaysMessage(DEFAULT_VENDING_MACHINE_MESSAGE);
+	}
 
 	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coins) {
 		setup();
