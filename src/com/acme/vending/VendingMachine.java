@@ -22,7 +22,7 @@ public class VendingMachine {
 	
 	private String renderValueInCents(int valueInCents) {
 		int cents = valueInCents % 100;
-		int dollars = valueInCents - cents;
+		int dollars = (valueInCents - cents) / 100;
 		return String.format("$%01d.%02d", dollars, cents);
 	}
 
