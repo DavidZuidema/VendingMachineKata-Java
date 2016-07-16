@@ -12,7 +12,6 @@ public class VendingMachineTest {
 		assertFalse(vendingMachine.isValidCoin(CoinType.PENNY));
 	}
 	
-
 	@Test
 	public void itIdentifiesValidCoinsCorrectly() {
 		VendingMachine vendingMachine = new VendingMachine();
@@ -21,4 +20,9 @@ public class VendingMachineTest {
 		assertTrue(vendingMachine.isValidCoin(CoinType.QUARTER));
 	}
 
+	@Test
+	public void itDeterminesTheCorrectMonetaryValueForCoins() {
+		VendingMachine vendingMachine = new VendingMachine();
+		assertEquals(5, vendingMachine.getCoinValueInCents(CoinType.PENNY));
+	}
 }

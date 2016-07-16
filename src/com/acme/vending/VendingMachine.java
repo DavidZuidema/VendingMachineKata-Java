@@ -11,4 +11,8 @@ public class VendingMachine {
 			return false;
 		}
 	}
+
+	public int getCoinValueInCents(CoinType penny) {
+		return 0;
+	}
 }
