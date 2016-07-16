@@ -68,10 +68,15 @@ public class VendingMachineTest {
 	@Test
 	public void whenValidCoinsAreInserted_itDisplaysTheTotalDeposited() {
 		insertedCoinsDisplayValue("$0.15", NICKEL, DIME);
+		insertedCoinsDisplayValue("$0.25", QUARTER);
+		insertedCoinsDisplayValue("$0.40", NICKEL, DIME, QUARTER);		
+		insertedCoinsDisplayValue("$1.00", QUARTER, QUARTER, QUARTER, QUARTER);
+		insertedCoinsDisplayValue("$1.05", QUARTER, QUARTER, QUARTER, QUARTER, NICKEL);
 	}
 
 	
 	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coinTypes) {
+		setup();
 		for (CoinType coin : coinTypes) {
 			insert(coin);
 		}
