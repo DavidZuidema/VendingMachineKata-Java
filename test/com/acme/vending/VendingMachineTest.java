@@ -9,14 +9,14 @@ public class VendingMachineTest {
 	@Test
 	public void itIdentifiesInvalidCoinsCorrectly() {
 		VendingMachine vendingMachine = new VendingMachine();
-		assertFalse(vendingMachine.isValidCoin("penny"));
+		assertFalse(vendingMachine.isValidCoin(CoinType.PENNY));
 	}
 	
 
 	@Test
 	public void itIdentifiesValidCoinsCorrectly() {
 		VendingMachine vendingMachine = new VendingMachine();
-		assertTrue(vendingMachine.isValidCoin("nickel"));
+		assertTrue(vendingMachine.isValidCoin(CoinType.NICKEL));
 	}
 
 }
