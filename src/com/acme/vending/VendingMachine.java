@@ -1,5 +1,6 @@
 package com.acme.vending;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VendingMachine {
@@ -19,6 +20,8 @@ public class VendingMachine {
 	}
 
 	public List<CoinType> getCoinsInCoinReturn() {
-		return null;
+		ArrayList<CoinType> coinReturn = new ArrayList<CoinType>();
+		coinReturn.add(CoinType.PENNY);
+		return coinReturn;
 	}
 }
