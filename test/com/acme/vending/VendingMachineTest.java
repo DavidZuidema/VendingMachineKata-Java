@@ -22,7 +22,7 @@ public class VendingMachineTest {
 	@Before
 	public void setup() {
 		coinDetector = new CoinDetector();
-		vendingMachine = new VendingMachine(coinDetector);		
+		vendingMachine = new VendingMachine(coinDetector);
 	}
 
 	@Test
@@ -76,16 +76,11 @@ public class VendingMachineTest {
 	
 	@Test
 	public void whenAProductIsSelected_andNoCoinsWereDeposited_itDisplaysThePrice() {
-		String display = vendingMachine.pushProductButton(ProductButtonType.A);
-		assertEquals(display, "PRICE $1.00");
+		assertEquals("PRICE $1.00", vendingMachine.pushProductButton(ProductButtonType.A));
+		assertEquals("PRICE $0.50", vendingMachine.pushProductButton(ProductButtonType.B));
+		assertEquals("PRICE $0.65", vendingMachine.pushProductButton(ProductButtonType.C));
 	}
 
-	@Test
-	public void whenADifferentProductIsSelected_andNoCoinsWereDeposited_itDisplaysADifferentPrice() {
-		String display = vendingMachine.pushProductButton(ProductButtonType.B);
-		assertEquals(display, "PRICE $0.50");
-	}
-	
 	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coinTypes) {
 		setup();
 		for (CoinType coin : coinTypes) {
