@@ -73,6 +73,12 @@ public class VendingMachineTest {
 		insertedCoinsDisplayValue("$1.00", QUARTER, QUARTER, QUARTER, QUARTER);
 		insertedCoinsDisplayValue("$1.05", QUARTER, QUARTER, QUARTER, QUARTER, NICKEL);
 	}
+	
+	@Test
+	public void whenAProductIsSelected_andNoCoinsWereDeposited_itDisplaysThePrice() {
+		String display = vendingMachine.pushProductButton("A");
+		assertEquals(display, "PRICE $1.00");
+	}
 
 	
 	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coinTypes) {

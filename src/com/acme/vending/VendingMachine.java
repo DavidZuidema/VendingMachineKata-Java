@@ -38,4 +38,8 @@ public class VendingMachine {
 		return coinReturn;
 	}
 
+	public String pushProductButton(String button) {
+		return null;
+	}
+
 }
