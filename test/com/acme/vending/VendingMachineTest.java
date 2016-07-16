@@ -63,7 +63,13 @@ public class VendingMachineTest {
 		displaysMessage("$0.10");
 	}
 	
-
+	@Test
+	public void whenValidCoinsAreInserted_itDisplaysTheTotalDeposited() {
+		insert(CoinType.NICKEL);
+		insert(CoinType.DIME);
+		displaysMessage("$0.15");
+	}
+	
 	
 	private void insert(CoinType coin) {
 		vendingMachine.insertCoin(coin);
