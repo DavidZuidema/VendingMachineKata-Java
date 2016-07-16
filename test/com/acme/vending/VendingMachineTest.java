@@ -80,6 +80,11 @@ public class VendingMachineTest {
 		assertEquals(display, "PRICE $1.00");
 	}
 
+	@Test
+	public void whenADifferentProductIsSelected_andNoCoinsWereDeposited_itDisplaysADifferentPrice() {
+		String display = vendingMachine.pushProductButton("B");
+		assertEquals(display, "PRICE $0.50");
+	}
 	
 	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coinTypes) {
 		setup();
