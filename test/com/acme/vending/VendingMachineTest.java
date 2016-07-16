@@ -28,6 +28,7 @@ public class VendingMachineTest {
 
 	@Test
 	public void itDeterminesTheCorrectMonetaryValueForCoins() {
-		assertEquals(5, vendingMachine.getCoinValueInCents(CoinType.PENNY));
+		assertEquals(5, vendingMachine.getCoinValueInCents(CoinType.NICKEL));
+		assertEquals(10, vendingMachine.getCoinValueInCents(CoinType.DIME));
 	}
 }
