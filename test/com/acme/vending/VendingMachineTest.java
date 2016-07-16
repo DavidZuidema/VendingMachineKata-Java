@@ -10,6 +10,8 @@ import org.junit.Test;
 
 public class VendingMachineTest {
 	
+	private static final CoinType INVALID_COIN = CoinType.PENNY;
+
 	private static final String DEFAULT_VENDING_MACHINE_MESSAGE = "INSERT COIN";
 	
 	private VendingMachine vendingMachine;
@@ -23,18 +25,22 @@ public class VendingMachineTest {
 
 	@Test
 	public void whenNoCoinsHaveBeenInserted_itDisplaysTheDefaultMessage() {
-		assertEquals(DEFAULT_VENDING_MACHINE_MESSAGE, vendingMachine.getDisplay());
+		checkThatMachineDisplaysMessage(DEFAULT_VENDING_MACHINE_MESSAGE);
 	}
 	
 	@Test
 	public void whenAnInvalidCoinHasBeenInserted_itDisplaysTheDefaultMessage() {
-		vendingMachine.insertCoin(CoinType.PENNY);
-		assertEquals(DEFAULT_VENDING_MACHINE_MESSAGE, vendingMachine.getDisplay());
+		vendingMachine.insertCoin(INVALID_COIN);
+		checkThatMachineDisplaysMessage(DEFAULT_VENDING_MACHINE_MESSAGE);
 	}
 	
 	@Test
 	public void whenOneInvalidCoinHasBeenInserted_itAddsThatCoinToTheCoinReturn() {
-		vendingMachine.insertCoin(CoinType.PENNY);
-		assertThat(vendingMachine.getCoinsInCoinReturn(), hasItem(CoinType.PENNY));
+		vendingMachine.insertCoin(INVALID_COIN);
+		assertThat(vendingMachine.getCoinsInCoinReturn(), hasItem(INVALID_COIN));
+	}
+	
+	private void checkThatMachineDisplaysMessage(String message) {
+		assertEquals(message, vendingMachine.getDisplay());
 	}
 }
