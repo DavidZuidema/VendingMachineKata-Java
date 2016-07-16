@@ -39,7 +39,7 @@ public class VendingMachine {
 	}
 
 	public String pushProductButton(String button) {
-		return null;
+		return "PRICE $1.00";
 	}
 
 }
