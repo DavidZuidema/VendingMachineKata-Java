@@ -16,5 +16,8 @@ public class VendingMachineTest {
 		vendingMachine = new VendingMachine(coinDetector);		
 	}
 
-
+	@Test
+	public void whenNoCoinsHaveBeenInserted_itDisplaysTheDefaultMessage() {
+		assertEquals("INSERT COIN", vendingMachine.getDisplay());
+	}
 }

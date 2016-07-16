@@ -7,4 +7,8 @@ public class VendingMachine {
 	public VendingMachine(CoinDetector coinDetector) {
 		this.coinDetector = coinDetector;
 	}
+
+	public String getDisplay() {
+		return null;
+	}
 }
