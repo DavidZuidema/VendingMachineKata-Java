@@ -30,5 +30,6 @@ public class VendingMachineTest {
 	public void itDeterminesTheCorrectMonetaryValueForCoins() {
 		assertEquals(5, vendingMachine.getCoinValueInCents(CoinType.NICKEL));
 		assertEquals(10, vendingMachine.getCoinValueInCents(CoinType.DIME));
+		assertEquals(25, vendingMachine.getCoinValueInCents(CoinType.QUARTER));
 	}
 }
