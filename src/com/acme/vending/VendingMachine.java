@@ -54,8 +54,17 @@ public class VendingMachine {
 
 	private String selectProduct(Product product) {
 		if (product.getPriceInCents() > totalInsertedInCents) {
+			return "PRICE " + renderValueInCents(product.getPriceInCents());
+		} else {
+			dispenseProduct(product);
+			totalInsertedInCents = 0;
+			return "THANK YOU";
 		}
-		return "PRICE " + renderValueInCents(product.getPriceInCents());
+
+	}
+
+	private void dispenseProduct(Product product) {
+		
 	}
 
 	public void addProduct(ProductButtonType button, Product product) {
