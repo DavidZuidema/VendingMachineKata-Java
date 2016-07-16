@@ -60,6 +60,12 @@ public class VendingMachineTest {
 		checkThatMachineDisplaysMessage("$0.05");
 	}
 	
+	@Test
+	public void whenADimeIsInserted_itDisplaysTheTotalDeposited() {
+		vendingMachine.insertCoin(CoinType.DIME);
+		checkThatMachineDisplaysMessage("$0.10");
+	}
+	
 	private void checkThatMachineDisplaysMessage(String message) {
 		assertEquals(message, vendingMachine.getDisplay());
 	}
