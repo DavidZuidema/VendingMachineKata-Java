@@ -76,13 +76,13 @@ public class VendingMachineTest {
 	
 	@Test
 	public void whenAProductIsSelected_andNoCoinsWereDeposited_itDisplaysThePrice() {
-		String display = vendingMachine.pushProductButton("A");
+		String display = vendingMachine.pushProductButton(ProductButtonType.A);
 		assertEquals(display, "PRICE $1.00");
 	}
 
 	@Test
 	public void whenADifferentProductIsSelected_andNoCoinsWereDeposited_itDisplaysADifferentPrice() {
-		String display = vendingMachine.pushProductButton("B");
+		String display = vendingMachine.pushProductButton(ProductButtonType.B);
 		assertEquals(display, "PRICE $0.50");
 	}
 	

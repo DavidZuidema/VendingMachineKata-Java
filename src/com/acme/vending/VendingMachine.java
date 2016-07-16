@@ -5,6 +5,8 @@ import java.util.List;
 
 public class VendingMachine {
 	
+	private static final String DEFAULT_MESSAGE = "INSERT COIN";
+	
 	private int totalInsertedInCents = 0;
 	private CoinDetector coinDetector;
 	private ArrayList<CoinType> coinReturn  = new ArrayList<CoinType>();
@@ -15,7 +17,7 @@ public class VendingMachine {
 
 	public String getDisplay() {
 		if (totalInsertedInCents == 0) {
-			return "INSERT COIN";
+			return DEFAULT_MESSAGE;
 		}
 		return renderValueInCents(totalInsertedInCents);
 	}
@@ -38,8 +40,15 @@ public class VendingMachine {
 		return coinReturn;
 	}
 
-	public String pushProductButton(String button) {
-		return "PRICE $1.00";
+	public String pushProductButton(ProductButtonType button) {
+		switch (button) {
+		case A:
+			return "PRICE $1.00";
+		case B:
+			return "PRICE $0.50";
+		default:
+			return DEFAULT_MESSAGE;
+		}
 	}
 
 }
