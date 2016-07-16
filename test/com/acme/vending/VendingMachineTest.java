@@ -8,8 +8,12 @@ import org.junit.Test;
 
 public class VendingMachineTest {
 	
+	private static final CoinType NICKEL = CoinType.NICKEL;
+	private static final CoinType DIME = CoinType.DIME;
+	private static final CoinType QUARTER = CoinType.QUARTER;
 	private static final CoinType ANOTHER_INVALID_COIN = CoinType.LOONIE;
 	private static final CoinType INVALID_COIN = CoinType.PENNY;
+
 	private static final String DEFAULT_VENDING_MACHINE_MESSAGE = "INSERT COIN";
 	
 	private VendingMachine vendingMachine;
@@ -47,29 +51,32 @@ public class VendingMachineTest {
 	
 	@Test
 	public void whenANickelIsInserted_itIsNotAddedToTheCoinReturn() {
-		insert(CoinType.NICKEL);
+		insert(NICKEL);
 		coinReturnIsEmpty();
 	}
 	
 	@Test
 	public void whenANickelIsInserted_itDisplaysTheTotalDeposited() {
-		insert(CoinType.NICKEL);
-		displaysMessage("$0.05");
+		insertedCoinsDisplayValue("$0.05", NICKEL);
 	}
 	
 	@Test
 	public void whenADimeIsInserted_itDisplaysTheTotalDeposited() {
-		insert(CoinType.DIME);
-		displaysMessage("$0.10");
+		insertedCoinsDisplayValue("$0.10", DIME);
 	}
 	
 	@Test
 	public void whenValidCoinsAreInserted_itDisplaysTheTotalDeposited() {
-		insert(CoinType.NICKEL);
-		insert(CoinType.DIME);
-		displaysMessage("$0.15");
+		insertedCoinsDisplayValue("$0.15", NICKEL, DIME);
 	}
+
 	
+	private void insertedCoinsDisplayValue(String valueDisplay, CoinType...coinTypes) {
+		for (CoinType coin : coinTypes) {
+			insert(coin);
+		}
+		displaysMessage(valueDisplay);
+	}
 	
 	private void insert(CoinType coin) {
 		vendingMachine.insertCoin(coin);
