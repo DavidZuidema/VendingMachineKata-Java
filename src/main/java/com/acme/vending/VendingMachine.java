@@ -65,13 +65,17 @@ public class VendingMachine {
 			return OUT_OF_STOCK_MESSAGE;
 		}
 		
-		if (fundsDepositedInCents < product.getPriceInCents()) {
+		if (!hasDepositedEnoughFundsToBuy(product)) {
 			return "PRICE " + renderDollarAmountFromCents(product.getPriceInCents());
 		}
 		
 		dispenseProduct(product);
 		fundsDepositedInCents = 0;
 		return THANK_YOU_MESSAGE;
+	}
+
+	private boolean hasDepositedEnoughFundsToBuy(Product product) {
+		return fundsDepositedInCents >= product.getPriceInCents();
 	}
 
 	private void dispenseProduct(Product product) {
