@@ -14,7 +14,7 @@ public class VendingMachine {
 	
 	private int totalInsertedInCents = 0;
 	private ArrayList<CoinType> coinReturn  = new ArrayList<CoinType>();
-	private Map<ProductButtonType, Product> products = new TreeMap<ProductButtonType, Product>();;
+	private Map<ProductButtonType, Product> products = new TreeMap<ProductButtonType, Product>();
 
 	public VendingMachine(CoinDetector coinDetector) {
 		this.coinDetector = coinDetector;
@@ -69,6 +69,11 @@ public class VendingMachine {
 
 	public void addProduct(ProductButtonType button, Product product) {
 		products.put(button, product);
+	}
+
+	public void returnCoins() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

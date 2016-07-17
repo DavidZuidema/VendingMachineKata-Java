@@ -95,6 +95,14 @@ public class VendingMachineTest {
 		pushingButtonDisplaysMessage(A, THANK_YOU_MESSAGE);
 		displaysMessage(INSERT_COIN_MESSAGE);
 	}
+	
+	@Test
+	public void whenReturnCoinsIsPushed_allFundsAreSentToTheCoinReturn() {
+		insert(QUARTER, NICKEL, DIME, DIME);
+		vendingMachine.returnCoins();
+		coinReturnContains(QUARTER, NICKEL, DIME, DIME);
+		displaysMessage(INSERT_COIN_MESSAGE);
+	}
 
 	private void insertingCoinsDisplayValue(String valueDisplay, CoinType...coins) {
 		setup();
