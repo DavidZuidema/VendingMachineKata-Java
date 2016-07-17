@@ -25,7 +25,6 @@ public class Product {
 	}
 
 	public void dispenseOne() {
-		// TODO Auto-generated method stub
-		
+		inventoryCount -= 1;
 	}
 }
