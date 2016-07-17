@@ -33,4 +33,10 @@ public class ProductTest {
 		product.dispenseOne();
 		assertTrue(product.isInStock());
 	}
+	
+	@Test(expected=RuntimeException.class)
+	public void whenDispensingAnOutOfStockProduct_throwsException() throws Exception {
+		Product product = new Product("widget", 100, 0);
+		product.dispenseOne();
+	}
 }
