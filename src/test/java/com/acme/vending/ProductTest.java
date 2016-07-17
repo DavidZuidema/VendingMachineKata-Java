@@ -26,4 +26,11 @@ public class ProductTest {
 		assertFalse(product.isInStock());
 	}
 	
+	@Test
+	public void whenDispensingAProductWithSeveralItemsLeft_remainsInStock() throws Exception {
+		Product product = new Product("widget", 100, 2);
+		assertTrue(product.isInStock());
+		product.dispenseOne();
+		assertTrue(product.isInStock());
+	}
 }
