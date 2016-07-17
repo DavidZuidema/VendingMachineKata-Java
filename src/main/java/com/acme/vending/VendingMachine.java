@@ -9,6 +9,7 @@ public class VendingMachine {
 	
 	private static final String DEFAULT_MESSAGE = "INSERT COIN";
 	private static final String THANK_YOU_MESSAGE = "THANK YOU";
+	private static final String OUT_OF_STOCK_MESSAGE = "SOLD OUT";
 	
 	private CoinDetector coinDetector;
 	private CoinChanger coinChanger;
@@ -60,13 +61,17 @@ public class VendingMachine {
 	}
 
 	private String selectProduct(Product product) {
+		if (!product.isInStock()) {
+			return OUT_OF_STOCK_MESSAGE;
+		}
+		
 		if (fundsDepositedInCents < product.getPriceInCents()) {
 			return "PRICE " + renderDollarAmountFromCents(product.getPriceInCents());
-		} else {
-			dispenseProduct(product);
-			fundsDepositedInCents = 0;
-			return THANK_YOU_MESSAGE;
 		}
+		
+		dispenseProduct(product);
+		fundsDepositedInCents = 0;
+		return THANK_YOU_MESSAGE;
 	}
 
 	private void dispenseProduct(Product product) {
