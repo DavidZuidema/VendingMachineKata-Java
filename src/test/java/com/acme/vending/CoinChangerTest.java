@@ -3,12 +3,16 @@ package com.acme.vending;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.*;
 
 import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.matchers.Contains;
+
+import com.google.common.collect.Lists;
 
 public class CoinChangerTest {
 
@@ -32,18 +36,16 @@ public class CoinChangerTest {
 	
 	@Test
 	public void whenMakingChangeForFiftyCents_returnsLargestDenominationsAvailable() {
-		Collection<CoinType> coins = coinChanger.makeChange(50);
-		assertEquals(2, coins.size());
-		assertThat(coins, hasItem(QUARTER));
-		assertThat(coins, not(hasItems(DIME, NICKEL)));
+		makeChangeForAmountReturnCoins(50, QUARTER, QUARTER);
 	}
 	
 	@Test
 	public void whenMakingChangeForTwentyCents_returnsLargestDenominationsAvailable() {
-		Collection<CoinType> coins = coinChanger.makeChange(20);
-		assertEquals(2, coins.size());
-		assertThat(coins, hasItem(DIME));
-		assertThat(coins, not(hasItems(QUARTER, NICKEL)));
+		makeChangeForAmountReturnCoins(20, DIME, DIME);
+	}
+	
+	private void makeChangeForAmountReturnCoins(int amountInCents, CoinType...coinsReturned) {
+		assertThat(coinChanger.makeChange(amountInCents), contains(coinsReturned));
 	}
 	
 	@Test
