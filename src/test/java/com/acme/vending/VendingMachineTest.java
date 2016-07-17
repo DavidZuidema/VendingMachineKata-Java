@@ -95,13 +95,13 @@ public class VendingMachineTest {
 	
 	@Test
 	public void whenValidCoinsAreInserted_itDisplaysTheTotalDeposited() {
-		insertingCoinsDisplayValue("$0.05", NICKEL);
-		insertingCoinsDisplayValue("$0.10", DIME);
-		insertingCoinsDisplayValue("$0.15", NICKEL, DIME);
-		insertingCoinsDisplayValue("$0.25", QUARTER);
-		insertingCoinsDisplayValue("$0.40", NICKEL, DIME, QUARTER);		
-		insertingCoinsDisplayValue("$1.00", QUARTER, QUARTER, QUARTER, QUARTER);
-		insertingCoinsDisplayValue("$1.05", QUARTER, QUARTER, QUARTER, QUARTER, NICKEL);
+		insertingCoinsDisplaysMessage("$0.05", NICKEL);
+		insertingCoinsDisplaysMessage("$0.10", DIME);
+		insertingCoinsDisplaysMessage("$0.15", NICKEL, DIME);
+		insertingCoinsDisplaysMessage("$0.25", QUARTER);
+		insertingCoinsDisplaysMessage("$0.40", NICKEL, DIME, QUARTER);		
+		insertingCoinsDisplaysMessage("$1.00", QUARTER, QUARTER, QUARTER, QUARTER);
+		insertingCoinsDisplaysMessage("$1.05", QUARTER, QUARTER, QUARTER, QUARTER, NICKEL);
 	}
 	
 	@Test
@@ -163,7 +163,7 @@ public class VendingMachineTest {
 		coinReturnContains(DIME);
 	}
 
-	private void insertingCoinsDisplayValue(String valueDisplay, CoinType...coins) {
+	private void insertingCoinsDisplaysMessage(String valueDisplay, CoinType...coins) {
 		setup();
 		insert(coins);
 		displaysMessage(valueDisplay);
