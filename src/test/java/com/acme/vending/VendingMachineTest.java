@@ -123,7 +123,8 @@ public class VendingMachineTest {
 	}
 	
 	private void pushingButtonDisplaysMessage(ProductButtonType button, String displayMessage) {
-		assertEquals(displayMessage, vendingMachine.pushProductButton(button));
+		vendingMachine.pushProductButton(button);
+		displaysMessage(displayMessage);
 	}
 
 	private void coinReturnContains(CoinType...coinTypes) {
