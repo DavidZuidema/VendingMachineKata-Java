@@ -9,6 +9,11 @@ import org.junit.Test;
 
 public class CoinDetectorTest {
 	
+	private static final CoinType PENNY = CoinType.PENNY;
+	private static final CoinType NICKEL = CoinType.NICKEL;
+	private static final CoinType DIME = CoinType.DIME;
+	private static final CoinType QUARTER = CoinType.QUARTER;
+	
 	private CoinDetector coinDetector;
 
 	@Before
@@ -18,21 +23,33 @@ public class CoinDetectorTest {
 
 	@Test
 	public void itIdentifiesInvalidCoinsCorrectly() {
-		assertFalse(coinDetector.isValidCoin(CoinType.PENNY));
+		isInvalidCoin(PENNY);
 	}
 	
 	@Test
 	public void itIdentifiesValidCoinsCorrectly() {
-		assertTrue(coinDetector.isValidCoin(CoinType.NICKEL));
-		assertTrue(coinDetector.isValidCoin(CoinType.DIME));
-		assertTrue(coinDetector.isValidCoin(CoinType.QUARTER));
+		isValidCoin(NICKEL);
+		isValidCoin(DIME);
+		isValidCoin(QUARTER);
 	}
 
 	@Test
 	public void itDeterminesTheCorrectMonetaryValueForCoins() {
-		assertEquals(5, coinDetector.getCoinValueInCents(CoinType.NICKEL));
-		assertEquals(10, coinDetector.getCoinValueInCents(CoinType.DIME));
-		assertEquals(25, coinDetector.getCoinValueInCents(CoinType.QUARTER));
+		coinHasValue(NICKEL, 5);
+		coinHasValue(DIME, 10);
+		coinHasValue(QUARTER, 25);
+	}
+	
+	private void coinHasValue(CoinType coin, int expectedValueInCents) {
+		assertEquals(expectedValueInCents, coinDetector.getCoinValueInCents(coin));
+	}
+
+	private void isValidCoin(CoinType coin) {
+		assertTrue(coinDetector.isValidCoin(coin));
+	}
+	
+	private void isInvalidCoin(CoinType coin) {
+		assertFalse(coinDetector.isValidCoin(coin));
 	}
 	
 }

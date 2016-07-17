@@ -2,8 +2,10 @@ package com.acme.vending;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class CoinChanger {
 	
@@ -11,7 +13,7 @@ public class CoinChanger {
 	 * LinkedHashMap guarantees iteration will occur in insertion order
 	 * which we need to make change from largest to smallest denominations
 	 */
-	private Map<CoinType, Integer> denominationsAvailable = new LinkedHashMap<CoinType, Integer>();
+	private Map<CoinType, Integer> denominationsAvailable = Maps.newLinkedHashMap();
 	
 	public CoinChanger() {
 		denominationsAvailable.put(CoinType.QUARTER, 25);
@@ -22,7 +24,7 @@ public class CoinChanger {
 	public Collection<CoinType> makeChange(int amountInCents) {
 		assertCanMakeChangeForAmount(amountInCents);
 		
-		ArrayList<CoinType> coins = new ArrayList<CoinType>();
+		ArrayList<CoinType> coins = Lists.newArrayList();
 		
 		for (Map.Entry<CoinType, Integer> entry : denominationsAvailable.entrySet()) {
 		    CoinType coin = entry.getKey();

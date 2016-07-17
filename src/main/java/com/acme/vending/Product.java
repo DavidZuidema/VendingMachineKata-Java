@@ -13,4 +13,8 @@ public class Product {
 	public int getPriceInCents() {
 		return priceInCents;
 	}
+	
+	public String getName() {
+		return name;
+	}
 }

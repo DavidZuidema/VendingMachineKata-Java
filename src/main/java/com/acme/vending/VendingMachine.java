@@ -13,7 +13,7 @@ public class VendingMachine {
 	private CoinDetector coinDetector;
 	private CoinChanger coinChanger;
 	
-	private int totalInsertedInCents = 0;
+	private int fundsDepositedInCents = 0;
 	private ArrayList<CoinType> coinReturn  = new ArrayList<CoinType>();
 	private Map<ProductButtonType, Product> products = new TreeMap<ProductButtonType, Product>();
 
@@ -23,13 +23,13 @@ public class VendingMachine {
 	}
 
 	public String getDisplay() {
-		if (totalInsertedInCents == 0) {
+		if (fundsDepositedInCents == 0) {
 			return DEFAULT_MESSAGE;
 		}
-		return renderValueInCents(totalInsertedInCents);
+		return renderDollarAmountFromCents(fundsDepositedInCents);
 	}
 	
-	private String renderValueInCents(int valueInCents) {
+	private String renderDollarAmountFromCents(int valueInCents) {
 		int cents = valueInCents % 100;
 		int dollars = (valueInCents - cents) / 100;
 		return String.format("$%01d.%02d", dollars, cents);
@@ -37,7 +37,7 @@ public class VendingMachine {
 
 	public void insertCoin(CoinType coin) {
 		if (coinDetector.isValidCoin(coin)) {
-			totalInsertedInCents += coinDetector.getCoinValueInCents(coin);
+			fundsDepositedInCents += coinDetector.getCoinValueInCents(coin);
 		} else {
 			coinReturn.add(coin);
 		}
@@ -56,17 +56,17 @@ public class VendingMachine {
 	}
 
 	private String selectProduct(Product product) {
-		if (product.getPriceInCents() > totalInsertedInCents) {
-			return "PRICE " + renderValueInCents(product.getPriceInCents());
+		if (fundsDepositedInCents < product.getPriceInCents()) {
+			return "PRICE " + renderDollarAmountFromCents(product.getPriceInCents());
 		} else {
 			dispenseProduct(product);
-			totalInsertedInCents = 0;
+			fundsDepositedInCents = 0;
 			return THANK_YOU_MESSAGE;
 		}
 	}
 
 	private void dispenseProduct(Product product) {
-		
+		//Placeholder
 	}
 
 	public void addProduct(ProductButtonType button, Product product) {
@@ -74,8 +74,8 @@ public class VendingMachine {
 	}
 
 	public void returnCoins() {
-		coinReturn.addAll(coinChanger.makeChange(totalInsertedInCents));
-		totalInsertedInCents = 0;
+		coinReturn.addAll(coinChanger.makeChange(fundsDepositedInCents));
+		fundsDepositedInCents = 0;
 	}
 
 }
