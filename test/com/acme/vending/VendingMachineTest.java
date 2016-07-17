@@ -23,11 +23,13 @@ public class VendingMachineTest {
 	
 	private VendingMachine vendingMachine;
 	private CoinDetector coinDetector;
+	private CoinChanger coinChanger;
 
 	@Before
 	public void setup() {
 		coinDetector = new CoinDetector();
-		vendingMachine = new VendingMachine(coinDetector);
+		coinChanger = new CoinChanger();
+		vendingMachine = new VendingMachine(coinDetector, coinChanger);
 		vendingMachine.addProduct(A, new Product("Cola", 100));
 		vendingMachine.addProduct(B, new Product("Chips", 50));
 		vendingMachine.addProduct(C, new Product("Candy", 65));
