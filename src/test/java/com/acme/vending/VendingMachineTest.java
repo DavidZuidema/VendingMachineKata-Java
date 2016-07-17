@@ -48,6 +48,7 @@ public class VendingMachineTest {
 	private void setupMockCoinChanger() {
 		coinChanger = mock(CoinChanger.class);
 		when(coinChanger.makeChange(40)).thenReturn(Lists.newArrayList(QUARTER,DIME,NICKEL));
+		when(coinChanger.makeChange(10)).thenReturn(Lists.newArrayList(DIME));
 	}
 
 	private void setupMockCoinDetector() {
@@ -153,6 +154,13 @@ public class VendingMachineTest {
 		displaysMessage(INSERT_COIN_MESSAGE);
 		pushingButtonDisplaysMessage(A, OUT_OF_STOCK_MESSAGE);	
 		displaysMessage(INSERT_COIN_MESSAGE);
+	}
+	
+	@Test
+	public void whenBuyingAnItemThatCostsLessThanIDeposited_itReturnsMyChange() {
+		insert(QUARTER, QUARTER, QUARTER);
+		pushingButtonDisplaysMessage(C, THANK_YOU_MESSAGE);
+		coinReturnContains(DIME);
 	}
 
 	private void insertingCoinsDisplayValue(String valueDisplay, CoinType...coins) {
