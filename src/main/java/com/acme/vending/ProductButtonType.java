@@ -1,5 +1,5 @@
 package com.acme.vending;
 
 public enum ProductButtonType {
-	A, B, C
+	A, B, C, D
 }

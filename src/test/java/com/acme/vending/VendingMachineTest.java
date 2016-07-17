@@ -23,9 +23,11 @@ public class VendingMachineTest {
 	private static final ProductButtonType A = ProductButtonType.A;
 	private static final ProductButtonType B = ProductButtonType.B;
 	private static final ProductButtonType C = ProductButtonType.C;
+	private static final ProductButtonType D = ProductButtonType.D;
 
 	private static final String INSERT_COIN_MESSAGE = "INSERT COIN";
 	private static final String THANK_YOU_MESSAGE = "THANK YOU";
+	private static final String OUT_OF_STOCK_MESSAGE = "SOLD OUT";
 	
 	private VendingMachine vendingMachine;
 	private CoinDetector coinDetector;
@@ -39,6 +41,7 @@ public class VendingMachineTest {
 		vendingMachine.addProduct(A, new Product("Cola", 100, 1));
 		vendingMachine.addProduct(B, new Product("Chips", 50, 1));
 		vendingMachine.addProduct(C, new Product("Candy", 65, 1));
+		vendingMachine.addProduct(D, new Product("Gum", 25, 0));
 	}
 
 	private void setupMockCoinChanger() {
@@ -127,6 +130,11 @@ public class VendingMachineTest {
 		vendingMachine.returnCoins();
 		coinReturnContains(QUARTER, DIME, NICKEL);
 		displaysMessage(INSERT_COIN_MESSAGE);
+	}
+	
+	@Test
+	public void whenSelectingAnItemNotInStock_displaysOutOfStockMessage() throws Exception {
+		pushingButtonDisplaysMessage(D, OUT_OF_STOCK_MESSAGE);
 	}
 
 	private void insertingCoinsDisplayValue(String valueDisplay, CoinType...coins) {
