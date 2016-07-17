@@ -25,6 +25,9 @@ public class Product {
 	}
 
 	public void dispenseOne() {
+		if (inventoryCount == 0) {
+			throw new RuntimeException("Cannot dispense product that is out of stock");
+		}
 		inventoryCount -= 1;
 	}
 }
