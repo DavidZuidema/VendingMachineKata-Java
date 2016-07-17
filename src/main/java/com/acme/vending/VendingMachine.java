@@ -16,13 +16,19 @@ public class VendingMachine {
 	private int fundsDepositedInCents = 0;
 	private ArrayList<CoinType> coinReturn  = new ArrayList<CoinType>();
 	private Map<ProductButtonType, Product> products = new TreeMap<ProductButtonType, Product>();
-
+	private String flashDisplayMessage = null;
+	
 	public VendingMachine(CoinDetector coinDetector, CoinChanger coinChanger) {
 		this.coinDetector = coinDetector;
 		this.coinChanger = coinChanger;
 	}
 
 	public String getDisplay() {
+		if (flashDisplayMessage != null) {
+			String message = flashDisplayMessage;
+			flashDisplayMessage = null;
+			return message;
+		}
 		if (fundsDepositedInCents == 0) {
 			return DEFAULT_MESSAGE;
 		}
@@ -47,11 +53,9 @@ public class VendingMachine {
 		return coinReturn;
 	}
 
-	public String pushProductButton(ProductButtonType button) {
+	public void pushProductButton(ProductButtonType button) {
 		if (products.containsKey(button)) {
-			return selectProduct(products.get(button));
-		} else {
-			return DEFAULT_MESSAGE;
+			displayOneTimeMessage(selectProduct(products.get(button)));
 		}
 	}
 
@@ -67,6 +71,10 @@ public class VendingMachine {
 
 	private void dispenseProduct(Product product) {
 		//Placeholder
+	}
+	
+	private void displayOneTimeMessage(String flashMessage) {
+		flashDisplayMessage = flashMessage;
 	}
 
 	public void addProduct(ProductButtonType button, Product product) {
