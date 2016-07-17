@@ -23,4 +23,9 @@ public class Product {
 	public boolean isInStock() {
 		return inventoryCount > 0;
 	}
+
+	public void dispenseOne() {
+		// TODO Auto-generated method stub
+		
+	}
 }
