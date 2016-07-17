@@ -1,10 +1,16 @@
 package com.acme.vending;
 
-import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.empty;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.common.collect.Lists;
 
 public class VendingMachineTest {
 
@@ -27,12 +33,29 @@ public class VendingMachineTest {
 
 	@Before
 	public void setup() {
-		coinDetector = new CoinDetector();
-		coinChanger = new CoinChanger();
+		setupMockCoinDetector();
+		setupMockCoinChanger();
 		vendingMachine = new VendingMachine(coinDetector, coinChanger);
 		vendingMachine.addProduct(A, new Product("Cola", 100));
 		vendingMachine.addProduct(B, new Product("Chips", 50));
 		vendingMachine.addProduct(C, new Product("Candy", 65));
+	}
+
+	private void setupMockCoinChanger() {
+		coinChanger = mock(CoinChanger.class);
+		when(coinChanger.makeChange(40)).thenReturn(Lists.newArrayList(QUARTER,DIME,NICKEL));
+	}
+
+	private void setupMockCoinDetector() {
+		coinDetector = mock(CoinDetector.class);
+		when(coinDetector.isValidCoin(INVALID_COIN)).thenReturn(false);
+		when(coinDetector.isValidCoin(ANOTHER_INVALID_COIN)).thenReturn(false);
+		when(coinDetector.isValidCoin(NICKEL)).thenReturn(true);
+		when(coinDetector.isValidCoin(DIME)).thenReturn(true);
+		when(coinDetector.isValidCoin(QUARTER)).thenReturn(true);
+		when(coinDetector.getCoinValueInCents(NICKEL)).thenReturn(5);
+		when(coinDetector.getCoinValueInCents(DIME)).thenReturn(10);
+		when(coinDetector.getCoinValueInCents(QUARTER)).thenReturn(25);
 	}
 
 	@Test
@@ -102,7 +125,7 @@ public class VendingMachineTest {
 	public void whenReturnCoinsIsPushed_allFundsAreSentToTheCoinReturn() {
 		insert(QUARTER, NICKEL, DIME);
 		vendingMachine.returnCoins();
-		coinReturnContains(QUARTER, NICKEL, DIME);
+		coinReturnContains(QUARTER, DIME, NICKEL);
 		displaysMessage(INSERT_COIN_MESSAGE);
 	}
 
@@ -128,12 +151,11 @@ public class VendingMachineTest {
 	}
 
 	private void coinReturnContains(CoinType...coinTypes) {
-		assertEquals(coinTypes.length, vendingMachine.getCoinsInCoinReturn().size());
-		assertThat(vendingMachine.getCoinsInCoinReturn(), hasItems(coinTypes));
+		assertThat(vendingMachine.getCoinsInCoinReturn(), contains(coinTypes));
 	}
 	
 	private void coinReturnIsEmpty() {
-		assertEquals(0, vendingMachine.getCoinsInCoinReturn().size());
+		assertThat(vendingMachine.getCoinsInCoinReturn(), is(empty()));
 	}
 	
 }
