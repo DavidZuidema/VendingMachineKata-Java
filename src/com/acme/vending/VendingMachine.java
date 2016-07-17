@@ -1,6 +1,7 @@
 package com.acme.vending;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -72,8 +73,31 @@ public class VendingMachine {
 	}
 
 	public void returnCoins() {
-		// TODO Auto-generated method stub
+		coinReturn.addAll(makeChange(totalInsertedInCents));
+		totalInsertedInCents = 0;
+	}
+
+	private Collection<CoinType> makeChange(int valueInCents) {
+		if (valueInCents % 5 > 0) {
+			throw new RuntimeException("Cannot make change in amount " + valueInCents);
+		}
 		
+		ArrayList<CoinType> coins = new ArrayList<CoinType>();
+		
+		while (valueInCents >= 25) {
+			coins.add(CoinType.QUARTER);
+			valueInCents -= 25;
+		}
+		while (valueInCents >= 10) {
+			coins.add(CoinType.DIME);
+			valueInCents -= 10;
+		}
+		while (valueInCents >= 5) {
+			coins.add(CoinType.NICKEL);
+			valueInCents -= 5;
+		}
+		
+		return coins;
 	}
 
 }

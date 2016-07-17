@@ -98,9 +98,9 @@ public class VendingMachineTest {
 	
 	@Test
 	public void whenReturnCoinsIsPushed_allFundsAreSentToTheCoinReturn() {
-		insert(QUARTER, NICKEL, DIME, DIME);
+		insert(QUARTER, NICKEL, DIME);
 		vendingMachine.returnCoins();
-		coinReturnContains(QUARTER, NICKEL, DIME, DIME);
+		coinReturnContains(QUARTER, NICKEL, DIME);
 		displaysMessage(INSERT_COIN_MESSAGE);
 	}
 
