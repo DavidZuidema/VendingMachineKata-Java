@@ -70,7 +70,8 @@ public class VendingMachine {
 		}
 		
 		dispenseProduct(product);
-		fundsDepositedInCents = 0;
+		fundsDepositedInCents -= product.getPriceInCents();
+		returnCoins();
 		return THANK_YOU_MESSAGE;
 	}
 
