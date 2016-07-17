@@ -75,7 +75,7 @@ public class VendingMachine {
 	}
 
 	private void dispenseProduct(Product product) {
-		//Placeholder
+		product.dispenseOne();
 	}
 	
 	private void displayOneTimeMessage(String flashMessage) {

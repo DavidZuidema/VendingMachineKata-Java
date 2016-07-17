@@ -147,7 +147,6 @@ public class VendingMachineTest {
 	}
 	
 	@Test
-	@Ignore
 	public void whenBuyingTheLastItem_selectingItAgainDisplaysSoldOut() throws Exception {
 		insert(QUARTER, QUARTER, QUARTER, QUARTER);
 		pushingButtonDisplaysMessage(A, THANK_YOU_MESSAGE);
