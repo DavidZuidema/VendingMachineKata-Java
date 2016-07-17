@@ -135,6 +135,14 @@ public class VendingMachineTest {
 	@Test
 	public void whenSelectingAnItemNotInStock_displaysOutOfStockMessage() throws Exception {
 		pushingButtonDisplaysMessage(D, OUT_OF_STOCK_MESSAGE);
+		displaysMessage(INSERT_COIN_MESSAGE);
+	}
+	
+	@Test
+	public void whenSelectingAnItemNotInStock_afterInsertingCoins_displaysOutOfStockMessage() throws Exception {
+		insert(QUARTER);
+		pushingButtonDisplaysMessage(D, OUT_OF_STOCK_MESSAGE);
+		displaysMessage("$0.25");
 	}
 
 	private void insertingCoinsDisplayValue(String valueDisplay, CoinType...coins) {
